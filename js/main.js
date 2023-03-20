@@ -27,24 +27,16 @@ const COMMENT_LINES = [
 const NAMES_ARRAY = ['Степан', 'Вася', 'Гоша', 'Артур', 'Кирил', 'Евгений'];
 
 // Генератор рандомных чисел
-function getRandomInteger (min, max) {
+const getRandomInteger = (min, max) => {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
-}
+};
 
 // Возвращает случайный элемент массива
 const getRandomArrayElement = (array) =>
   array[getRandomInteger(0, array.length - 1)];
-
-// Возвращает случайное число Like
-const getRandomNumberLike = () =>
-  getRandomInteger(LIKE_NUMBER_MIN, LIKE_NUMBER_MAX);
-
-// Возвращает случайное число Avatar
-const getRandomNumberAvatar = () =>
-  getRandomInteger(1, AVATAR_NUMBER);
 
 // Генератор уникального id для comments
 const createIdGenerator = () => {
@@ -57,26 +49,26 @@ const createIdGenerator = () => {
 const generateCommentId = createIdGenerator();
 
 // Функция создает массивы и объекты
-let getArrayCount = (count, description, names, comment) => {
-  const arrayCount = [];
+const getArrayCount = (count, description, names, comment) => {
+  const photos = [];
   for (let i = 0; i < count; i++) {
 
     const createComment = () => ({
       id: count + generateCommentId(),
-      avatar: `img/avatar-${getRandomNumberAvatar()}.svg`,
+      avatar: `img/avatar-${getRandomInteger(1, AVATAR_NUMBER)}.svg`,
       message: `${getRandomArrayElement(comment)} ${getRandomArrayElement(comment)}`,
       name: getRandomArrayElement(names)});
 
-    const createObject = {
+    const photo = {
       id: i + 1,
-      url: `photos/${i}.jpg`,
+      url: `photos/${i + 1}.jpg`,
       descriotion: getRandomArrayElement(description),
-      like: getRandomNumberLike(),
+      like: getRandomInteger(LIKE_NUMBER_MIN, LIKE_NUMBER_MAX),
       comments: Array.from({length: getRandomInteger(0, COMMENT_COUNT)},createComment),
     };
-    arrayCount.push(createObject);
+    photos.push(photo);
   }
-  return arrayCount;
+  return photos;
 };
 
 getArrayCount(PICTURE_COUNT, DESCRIPTIONS_ARRAY, NAMES_ARRAY, COMMENT_LINES);
