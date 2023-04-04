@@ -6,10 +6,8 @@ const getRandomInteger = (min, max) => {
   return Math.floor(result);
 };
 
-export {getRandomInteger};
-
 // Возвращает случайный элемент массива
 const getRandomArrayElement = (array) =>
   array[getRandomInteger(0, array.length - 1)];
 
-export {getRandomArrayElement};
+export {getRandomArrayElement, getRandomInteger};
