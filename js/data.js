@@ -26,8 +26,7 @@ const COMMENT_LINES = [
 ];
 const NAMES_ARRAY = ['Степан', 'Вася', 'Гоша', 'Артур', 'Кирил', 'Евгений'];
 
-import getRandomInteger from './util.js';
-import getRandomArrayElement from './util.js';
+import {getRandomInteger, getRandomArrayElement} from './util.js';
 
 // Генератор уникального id для comments
 const createIdGenerator = () => {
@@ -62,4 +61,7 @@ const getArrayCount = (count, description, names, comment) => {
   return photos;
 };
 
-getArrayCount(PICTURE_COUNT, DESCRIPTIONS_ARRAY, NAMES_ARRAY, COMMENT_LINES);
+const createDataGeneration = getArrayCount(PICTURE_COUNT, DESCRIPTIONS_ARRAY, NAMES_ARRAY, COMMENT_LINES);
+
+export {createDataGeneration};
+
